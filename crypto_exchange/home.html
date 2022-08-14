@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #div1{
+            border: 1px solid;
+            padding: 10px;
+            box-shadow: 5px 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="color: wheat; background-color: black;">
+    <h1 style="text-align: center; font-family: 'Courier New', Courier, monospace;">crypto exchange</h1>
+    <h3 style="text-align: center; font-family: 'Courier New', Courier, monospace; color: beige;">we scam people</h3>
+    <div id="div1">
+    <h2>REGISTER</h2>
+    <form action="" method="post">
+        <input type="text" name="username" placeholder="username" autocomplete="off" style="background-color: #f4f0db;"><br><br>
+        <input type="text" name="email" placeholder="email" autocomplete="off" style="background-color: #f4f0db;"><br><br>
+        <input type="password" id="pwd" name="password" placeholder="password" style="background-color: #f4f0db;"><br><br>
+        <input type="password" id="c_pwd" name="c_password" placeholder="confirm password" style="background-color: #f4f0db;"><br><br>
+        <button type="submit" onclick="validate()" style="background-color: #f4f0db; color: black; font-family: 'Courier New', Courier, monospace;">SUBMIT</button>
+    </form>
+    <h6>already have an account?</h6>
+    <a href="/login" style="color: beige;">login</a>
+    </div><br>
+    <div style="text-align: center;">
+        <h3>latest crypto price</h3>
+        <p id="btc"></p>
+        <p id="eth"></p>
+        <p id="algo"></p>
+    </div>
+    <script>
+        let ws1 = new WebSocket('wss://stream.binance.com:9443/ws/btcusdt@trade')
+        let stockPriceBtc = document.getElementById("btc")
+        let lastPriceBtc = null
+        ws1.onmessage = (event)=>{
+            let stockObject = JSON.parse(event.data)
+            let priceBtc = parseFloat(stockObject.p).toFixed(2)
+            stockPriceBtc.innerText= "bitcoin: "+priceBtc 
+            if(lastPriceBtc>priceBtc){
+                stockPriceBtc.style.color='#f8f0f3'
+            }
+            else{
+                stockPriceBtc.style.color='#f5deb3'
+            }
+            lastPriceBtc=priceBtc;
+        }
+
+        let ws2 = new WebSocket('wss://stream.binance.com:9443/ws/ethusdt@trade')
+        let stockPriceEth = document.getElementById("eth")
+        let lastPriceEth = null
+        ws2.onmessage = (event)=>{
+            let stockObject = JSON.parse(event.data)
+            let priceEth = parseFloat(stockObject.p).toFixed(2)
+            stockPriceEth.innerText= "ethereum: "+priceEth 
+            // if(lastPriceEth==priceEth){
+            //     stockPriceEth.style.color='black';
+            // }
+            if(lastPriceEth>priceEth){
+                stockPriceEth.style.color='#f8f0f3'
+            }
+            else{
+                stockPriceEth.style.color='#f5deb3'
+            }
+            lastPriceEth=priceEth;
+        }
+
+        let ws3 = new WebSocket('wss://stream.binance.com:9443/ws/algousdt@trade')
+        let stockPriceAlgo = document.getElementById("algo")
+        let lastPriceAlgo = null
+        ws3.onmessage = (event)=>{
+            let stockObject = JSON.parse(event.data)
+            let priceAlgo = parseFloat(stockObject.p).toFixed(2)
+            stockPriceAlgo.innerText= "algorand: "+priceAlgo 
+            // if(lastPriceAlgo==priceAlgo){
+            //     stockPriceAlgo.style.color='black'
+            // }
+            if(lastPriceAlgo>priceAlgo){
+                stockPriceAlgo.style.color='#f8f0f3'
+            }
+            else{
+                stockPriceAlgo.style.color='#f5deb3'
+            }
+        }
+        function validate(){
+            if(document.getElementById("pwd").value!=document.getElementById("c_pwd").value){
+                alert("check the password again")
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

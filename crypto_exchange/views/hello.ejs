@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drip season</title>
+    <style>
+        .topnav {
+            overflow: hidden;
+        }
+        .topnav a {
+            float: left;
+            color: wheat;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .div1{
+            text-align: center;
+        }
+    </style>
+</head>
+<body style="color: wheat; background-color: black;">
+    <div class="topnav">
+        <a class="active" href="/">Home</a>
+        <a href="/buy">Buy</a>
+        <a href="/sell">Sell</a>
+    </div>
+    <div class="div1">
+        <h1>welcome <%= result.name %></h1>
+        <p>bitcoin price is:&nbsp;<%= result.price %><span>&nbsp;$</span></p>
+        <h2>your portfolio</h2>
+        <p>bitcoin you hold:&nbsp;<%= result.f_btc_ava %></p>
+        <p>us dollars you are left with:&nbsp;<%= result.f_usd_ava %><span>&nbsp;$</span></p>
+        <p>your portfolio value:&nbsp;<%= result.f_iv_ava %><span>&nbsp;$</span></p>
+    </div>
+</body>
+</html>                          
